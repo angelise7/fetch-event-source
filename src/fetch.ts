@@ -132,7 +132,7 @@ export function fetchEventSource(input: RequestInfo, {
                         // check if we need to retry:
                         const interval: any = onerror?.(err) ?? retryInterval;
                         window.clearTimeout(retryTimer);
-                        retryTimer = window.setTimeout(create, interval);
+                        // retryTimer = window.setTimeout(create, interval); 
                     } catch (innerErr) {
                         // we should not retry anymore:
                         dispose();
