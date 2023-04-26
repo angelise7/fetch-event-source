@@ -2,7 +2,7 @@ import { EventSourceMessage, getBytes, getLines, getMessages } from './parse';
 
 export const EventStreamContentType = 'text/event-stream';
 
-const DefaultRetryInterval = 1000;
+// const DefaultRetryInterval = 1000;
 const LastEventId = 'last-event-id';
 
 export interface FetchEventSourceInit extends RequestInit {
@@ -83,7 +83,7 @@ export function fetchEventSource(input: RequestInfo, {
             document.addEventListener('visibilitychange', onVisibilityChange);
         }
 
-        let retryInterval = DefaultRetryInterval;
+        // let retryInterval = DefaultRetryInterval;
         let retryTimer = 0;
         function dispose() {
             document.removeEventListener('visibilitychange', onVisibilityChange);
@@ -118,8 +118,8 @@ export function fetchEventSource(input: RequestInfo, {
                         // don't send the last-event-id header anymore:
                         delete headers[LastEventId];
                     }
-                }, retry => {
-                    retryInterval = retry;
+                }, () => {
+                    // retryInterval = retry;
                 }, onmessage)));
 
                 onclose?.();
@@ -130,7 +130,7 @@ export function fetchEventSource(input: RequestInfo, {
                     // if we haven't aborted the request ourselves:
                     try {
                         // check if we need to retry:
-                        const interval: any = onerror?.(err) ?? retryInterval;
+                        // const interval: any = onerror?.(err) ?? retryInterval;
                         window.clearTimeout(retryTimer);
                         // retryTimer = window.setTimeout(create, interval); 
                     } catch (innerErr) {
